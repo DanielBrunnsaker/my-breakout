@@ -29,10 +29,13 @@ func update_score_label() -> void:
 func _on_block_broken() -> void:
 	if not playing:
 		return
+
 	score += 1
 	update_score_label()
-	
-	# If no blocks left -> win
+
+	# Wait for queue_free() to actually remove the block
+	await get_tree().process_frame
+
 	if $Blocks.get_child_count() == 0:
 		show_congrats_screen()
 
