@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cdgy116bjfmqe"]
+
+[ext_resource type="Texture2D" uid="uid://xan4hve36ak5" path="res://block.png" id="1_im0tn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im0tn"]
+size = Vector2(483, 117)
+
+[node name="block" type="StaticBody2D" unique_id=1795020052 groups=["block"]]
+position = Vector2(33, 19)
+scale = Vector2(0.3, 0.3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=906690694]
+modulate = Color(0.44705883, 1, 1, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_im0tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1110653238]
+position = Vector2(0.5, -0.5)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("RectangleShape2D_im0tn")

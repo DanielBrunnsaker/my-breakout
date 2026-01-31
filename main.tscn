@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://fop01yrfd6on"]
+
+[ext_resource type="PackedScene" uid="uid://h5xtegd3alle" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://dggw3fr2kgo1h" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://p4ysm8j6ora5" path="res://bounds.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://64wvkg66v44a" path="res://ball.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cdgy116bjfmqe" path="res://block.tscn" id="2_lquwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(27, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(22, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(489, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(493, 20)
+
+[node name="Main" type="Node" unique_id=99347234]
+script = ExtResource("1_1bvp3")
+block_scene = ExtResource("2_lquwl")
+
+[node name="StartPosition" type="Marker2D" parent="." unique_id=439012259]
+position = Vector2(250, 300)
+
+[node name="Bounds" type="Node2D" parent="." unique_id=122387225]
+script = ExtResource("1_h2yge")
+
+[node name="LeftWall" type="StaticBody2D" parent="Bounds" unique_id=35172134]
+position = Vector2(0, 360)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/LeftWall" unique_id=1114928109]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="RightWall" type="StaticBody2D" parent="Bounds" unique_id=499643237]
+position = Vector2(481, 360)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/RightWall" unique_id=729367644]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="TopWall" type="StaticBody2D" parent="Bounds" unique_id=111588833]
+position = Vector2(244, 0)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/TopWall" unique_id=1034983748]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="BottomWall" type="StaticBody2D" parent="Bounds" unique_id=430513273 groups=["kill_floor"]]
+position = Vector2(241, 720)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/BottomWall" unique_id=1291408714]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Player" parent="." unique_id=478728566 instance=ExtResource("1_0xm2m")]
+position = Vector2(246, 671)
+
+[node name="Ball" parent="." unique_id=825538317 instance=ExtResource("2_h2yge")]
+
+[node name="Blocks" type="Node2D" parent="." unique_id=1979415478]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1339562379]
+
+[node name="StartScreen" type="Control" parent="UI" unique_id=902902994]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="UI/StartScreen" unique_id=212955482]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="StartButton" type="Button" parent="UI/StartScreen" unique_id=531555585]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 532.0
+offset_right = 372.0
+offset_bottom = 605.0
+theme_override_font_sizes/font_size = 40
+text = "Start"
+
+[node name="GameOverScreen" type="Control" parent="UI" unique_id=356249669]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 481.0
+offset_bottom = 721.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameOverLabel" type="Label" parent="UI/GameOverScreen" unique_id=1385062580]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.5
+offset_top = -218.5
+offset_right = 194.5
+offset_bottom = -47.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Oh no, Nicklas fell into the pit of despair!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="UI/GameOverScreen" unique_id=135271626]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 531.0
+offset_right = 370.0
+offset_bottom = 603.0
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=1535814617]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -68.5
+offset_right = 28.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9915195, 0.94349813, 0.98928994, 1)
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="CongratsScreen" type="Control" parent="UI" unique_id=528471003]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 481.0
+offset_bottom = 721.0
+
+[node name="RestartButton" type="Button" parent="UI/CongratsScreen" unique_id=575868716]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 533.0
+offset_right = 371.0
+offset_bottom = 605.0
+theme_override_font_sizes/font_size = 40
+
+[node name="CongratsLabel" type="Label" parent="UI/CongratsScreen" unique_id=1420316131]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 156.0
+offset_right = 428.0
+offset_bottom = 517.0
+theme_override_font_sizes/font_size = 40
+text = "Gratz! Nicklas now owes you a beer!"
+horizontal_alignment = 1
+autowrap_mode = 2
